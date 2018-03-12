@@ -42,11 +42,19 @@ func TestStatus_parseKV(t *testing.T) {
 				LineVoltage: 120.0,
 			},
 		},
+		// TODO fix all according https://github.com/maxxant/apcupsd-status-examples
+		// {
+		// 	desc: "OK time.Time",
+		// 	kv:   "BATTDATE : 2016-09-06",
+		// 	s: &Status{
+		// 		BatteryDate: time.Date(2016, time.September, 6, 0, 0, 0, 0, time.UTC),
+		// 	},
+		// },
 		{
-			desc: "OK time.Time",
-			kv:   "BATTDATE : 2016-09-06",
+			desc: "OK time.Time(2)",
+			kv:   "BATTDATE : 07/31/99",
 			s: &Status{
-				BatteryDate: time.Date(2016, time.September, 6, 0, 0, 0, 0, time.UTC),
+				BatteryDate: time.Date(1999, time.July, 31, 0, 0, 0, 0, time.UTC),
 			},
 		},
 		{
