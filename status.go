@@ -15,7 +15,8 @@ const (
 
 	// timeFormatShort is the package time format of date-only timestamps
 	// from a NIS.
-	timeFormatShort = "2006-01-02"
+	timeFormatShort  = "2006-01-02"
+	timeFormatShort2 = "01/02/06"
 )
 
 var (
@@ -265,6 +266,9 @@ func (s *Status) parseKVTime(k string, v string) (bool, error) {
 		s.LastSelftest, err = parseOptionalTime(timeFormatLong, v)
 	case keyBattDate:
 		s.BatteryDate, err = parseOptionalTime(timeFormatShort, v)
+		if err != nil {
+			s.BatteryDate, err = time.Parse(timeFormatShort2, v)
+		}
 	case keyEndAPC:
 		s.EndAPC, err = parseOptionalTime(timeFormatLong, v)
 	default:
